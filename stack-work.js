@@ -23,10 +23,38 @@ const display = stack => {
         current = current.next;
     }
  }
+
 display(starTrek);
+
+starTrek.pop();
+starTrek.pop();
+console.log("\n")
+display(starTrek);
+
 function is_palindrome(s) {
     s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
     // Your code goes here
+    const chars = new Stack();
+    for(let i = 0; i < s.length; i++){
+        chars.push(s[i]);
+    }
+
+    let palandrome = true;
+    let i = 0
+    while(chars.top !== null){
+        const char = chars.pop();
+        if(char !== s[i]){
+            palandrome = false;
+            break; 
+        }
+        i++
+    }
+    return palandrome
 }
+
+console.log(is_palindrome("dad"));
+console.log(is_palindrome("A man, a plan, a canal: Panama"));
+console.log(is_palindrome("1001"));
+console.log(is_palindrome("Tauhida"));
 
 
