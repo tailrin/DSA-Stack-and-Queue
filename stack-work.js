@@ -9,6 +9,7 @@ starTrek.push('Scotty');
 
 
 const peek = stack => {
+    if(stack.top === null){return null}
     return stack.top.data
 }
 
@@ -24,12 +25,11 @@ const display = stack => {
     }
  }
 
-display(starTrek);
+
 
 starTrek.pop();
 starTrek.pop();
-console.log("\n")
-display(starTrek);
+
 
 function is_palindrome(s) {
     s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
@@ -52,10 +52,33 @@ function is_palindrome(s) {
     return palandrome
 }
 
-console.log(is_palindrome("dad"));
-console.log(is_palindrome("A man, a plan, a canal: Panama"));
-console.log(is_palindrome("1001"));
-console.log(is_palindrome("Tauhida"));
+const sort = stack => {
+    const newStack = new Stack();
+
+    while(!isEmpty(stack)){
+        
+        if(isEmpty(newStack)){
+            
+            newStack.push(stack.pop())
+        }else if(peek(stack) <= peek(newStack)){
+           
+            newStack.push(stack.pop())
+        }else if(peek(stack) > peek(newStack)){
+            const tempVar = stack.pop();
+           
+            while(!isEmpty(newStack) && tempVar > peek(newStack)){
+                
+                stack.push(newStack.pop())
+            }
+            newStack.push(tempVar)
+        }
+
+        
+    }
+
+    return newStack
+}
+
 
 function matchingParentheses(s) {
     const parens = new Stack();
@@ -82,10 +105,14 @@ function matchingParentheses(s) {
     return "Matching parentheses"
   
 }
-console.log(matchingParentheses("(((())))(")); //extra open
-// console.log(matchingParentheses('(((())))'))
-// console.log(matchingParentheses("(((()))")); //extra open
-
-//   console.log( matchingParentheses("((())))"));//extra closed
+let numStack = new Stack()
+numStack.push(3)
+numStack.push(4)
+numStack.push(2)
+numStack.push(5)
+numStack.push(1)
+numStack.push(7)
+numStack = sort(numStack)
+display(numStack)
 
 
