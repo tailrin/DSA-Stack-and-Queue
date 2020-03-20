@@ -57,4 +57,35 @@ console.log(is_palindrome("A man, a plan, a canal: Panama"));
 console.log(is_palindrome("1001"));
 console.log(is_palindrome("Tauhida"));
 
+function matchingParentheses(s) {
+    const parens = new Stack();
+    for (let i = 0; i < s.length; i++) { 
+        if (s[i] === "(") {
+            parens.push({
+                data: s[i],
+                index: i});
+        }
+        else if (s[i] === ")") { 
+            try {
+                parens.pop();
+            }
+            catch(error) { 
+                return "There is an open parentheses at char " + i
+            }
+            
+        }
+        
+    }
+    if (parens.top !== null) { 
+        return "There is an extra open parentheses at " + parens.top.data.index;
+    }
+    return "Matching parentheses"
+  
+}
+console.log(matchingParentheses("(((())))(")); //extra open
+// console.log(matchingParentheses('(((())))'))
+// console.log(matchingParentheses("(((()))")); //extra open
+
+//   console.log( matchingParentheses("((())))"));//extra closed
+
 
